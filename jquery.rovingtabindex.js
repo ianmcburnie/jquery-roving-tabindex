@@ -1,82 +1,89 @@
 /**
 * @function jquery.rovingtabindex.js
+* @version 0.2.1
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @description Implements a roving tabindex on a collection of elements.
+* @description jQuery collection plugin that implements a roving keyboard tabindex
 * @summary http://www.w3.org/TR/wai-aria-practices/#kbd_general_within
-* @requires jquery.keyhandlers.js
+* @requires jquery-common-keys
 * @param {string} id
 * @param {Object} options
-* @param {string} options.cursorDirection
-* @fires rovingtabindex
+* @param {string} options.axis
+* @param {boolean} options.wrap
+* @param {string} options.activeIndex
+* @fires change.rovingTabindex
 */
 (function ($, window, document, undefined) {
 
-    $.fn.rovingtabindex = function rovingTabIndex(id, options) {
+    $.fn.rovingTabindex = function rovingTabindex(id, options) {
 
-        var _idx = 0,
-            options = options || {},
-            wrap = options.wrap,
-            cursorDirection = options.cursorDirection || 'both';
+        options = options || {};
+
+        var wrap = options.wrap,
+            axis = options.axis,
+            activeIndex = options.activeIndex || 0,
+            $collection = this;
+
+        $(this).eq(activeIndex).attr('tabindex', '0');
 
         return this.each(function onEach(i) {
 
             var $this = $(this);
 
-            // store collection index pos in element dataset
-            $this.attr('data-{0}'.replace('{0}', id), JSON.stringify({'rovingtabindex': _idx++}));
+            $this.commonKeys();
 
-            if (cursorDirection === 'horizontal') {
-                $this.on('leftkeydown', function onLeftArrowKey() {
-                    $this.trigger('prev');
+            // store collection index pos in element dataset
+            $this.eq(0).data(id, {"rovingtabindex": i++});
+
+            if (axis === 'x') {
+                $this.on('leftarrow.commonKeyDown', function onLeftArrowKey() {
+                    $this.trigger('prev.rovingTabindex');
                 });
 
-                $this.on('rightkeydown', function onRightArrowKey() {
-                    $this.trigger('next');
+                $this.on('rightarrow.commonKeyDown', function onRightArrowKey() {
+                    $this.trigger('next.rovingTabindex');
                 });
             }
-            else if (cursorDirection === 'vertical') {
-                $this.on('downkeydown', function onDownArrowKey() {
-                    $this.trigger('next');
+            else if (axis === 'y') {
+                $this.on('downarrow.commonKeyDown', function onDownArrowKey() {
+                    $this.trigger('next.rovingTabindex');
                 });
 
-                $this.on('upkeydown', function onUpArrowKey() {
-                    $this.trigger('prev');
+                $this.on('uparrow.commonKeyDown', function onUpArrowKey() {
+                    $this.trigger('prev.rovingTabindex');
                 });
             }
             else {
-                $this.on('leftkeydown upkeydown', function onLeftOrUpArrowKey() {
-                    $this.trigger('prev');
+                $this.on('leftarrow.commonKeyDown uparrow.commonKeyDown', function onLeftOrUpArrowKey() {
+                    $this.trigger('prev.rovingTabindex');
                 });
 
-                $this.on('rightkeydown downkeydown', function onRightOrDownArrowKey() {
-                    $this.trigger('next');
+                $this.on('rightarrow.commonKeyDown downarrow.commonKeyDown', function onRightOrDownArrowKey() {
+                    $this.trigger('next.rovingTabindex');
                 });
             }
 
-            $this.on('prev', function onPrev(e) {
+            $this.on('prev.rovingTabindex', function onPrev(e) {
                 var itemIdx = $this.data(id).rovingtabindex,
-                    $siblings = $('[data-{0}]'.replace('{0}', id)),
-                    $prevEl = $siblings.eq(itemIdx - 1),
+                    $prevEl = $collection.eq(itemIdx - 1),
                     hasPrevEl = $prevEl.length === 1,
-                    $lastEl = $siblings.eq($siblings.length-1),
+                    $lastEl = $collection.eq($collection.length-1),
                     $roveToEl = (hasPrevEl && itemIdx !== 0) ? $prevEl : (options.wrap !== false) ? $lastEl : $this;
 
                 $this.attr('tabindex', '-1');
                 $roveToEl.attr('tabindex', '0');
-                $this.trigger('rovingtabindex', $roveToEl);
+                $this.trigger('change.rovingTabindex', $roveToEl);
             });
 
-            $this.on('next', function onNext(e) {
+            $this.on('next.rovingTabindex', function onNext(e) {
                 var itemIdx = $this.data(id).rovingtabindex,
-                    $siblings = $('[data-{0}]'.replace('{0}', id)),
-                    $nextEl = $siblings.eq(itemIdx + 1),
+                    $nextEl = $collection.eq(itemIdx + 1),
                     hasNextEl = $nextEl.length === 1,
-                    $firstEl = $siblings.eq(0),
+                    $firstEl = $collection.eq(0),
                     $roveToEl = (hasNextEl) ? $nextEl : (options.wrap !== false) ? $firstEl: $this;
 
                 $this.attr('tabindex', '-1');
                 $roveToEl.attr('tabindex', '0');
-                $this.trigger('rovingtabindex', $roveToEl);
+                $this.trigger('change.rovingTabindex', $roveToEl);
             });
 
         });
