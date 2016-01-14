@@ -1,6 +1,6 @@
 /**
 * @function jquery.rovingtabindex.js
-* @version 0.2.2
+* @version 0.2.3
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
 * @description jQuery collection plugin that implements a roving keyboard tabindex
 * @summary http://www.w3.org/TR/wai-aria-practices/#kbd_general_within
