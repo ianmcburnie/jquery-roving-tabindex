@@ -30,8 +30,8 @@
             $(function() {
                 $('#demo_list > li').rovingTabindex('demo_list');
 
-                $("#demo_list").on('change.rovingTabindex', function(e, newTabIndex) {
-                    console.log('change.rovingTabindex', e);
+                $("#demo_list").on('rovingTabindexChange', function(e, newTabIndex) {
+                    console.log('rovingTabindexChange', e);
                     newTabIndex.focus();
                 });
             });

@@ -20,7 +20,7 @@ Please use the tilde range specifier in your package.json to pin to a fixed majo
 ## Install
 
 ```js
-npm install @ebay/jquery-roving-tabindex --save
+npm install @ebay/jquery-roving-tabindex
 ```
 
 ## Params
@@ -35,7 +35,7 @@ npm install @ebay/jquery-roving-tabindex --save
 
 ## Events
 
-* change.rovingTabindex : fired when collection's roving tabindex changes
+* rovingTabindexChange : fired when collection's roving tabindex changes
 
 ## Example
 
@@ -61,6 +61,13 @@ Output:
     <li role="tab" data-tabs_0="{"rovingtabindex":1}">Tab 1</li>
     <li role="tab" data-tabs_0="{"rovingtabindex":2}">Tab 2</li>
 </ul>
+```
+
+
+To listen for roving tabindex change:
+
+```js
+$('#tabs_0 > li').on('rovingTabindexChange', function(e, newTabindexItem) {});
 ```
 
 ## Development

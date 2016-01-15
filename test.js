@@ -17,37 +17,37 @@ describe("jquery.rovingtabindex.js", function() {
 
     it("should trigger change.rovingTabindex event on downarrow.commonKeyDown by default", function(done){
         $collection.rovingTabindex('foo');
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('downarrow.commonKeyDown');
     });
 
     it("should trigger change.rovingTabindex event on uparrow.commonKeyDown by default", function(done){
         $collection.rovingTabindex('foo');
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('uparrow.commonKeyDown');
     });
 
     it("should trigger change.rovingTabindex event on downarrow.commonKeyDown when options.axis=y", function(done){
         $collection.rovingTabindex('foo',{axis:"y"});
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('downarrow.commonKeyDown');
     });
 
     it("should trigger change.rovingTabindex event on uparrow.commonKeyDown when options.axis=y", function(done){
         $collection.rovingTabindex('foo',{axis:"y"});
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('uparrow.commonKeyDown');
     });
 
     it("should trigger change.rovingTabindex event on leftarrow.commonKeyDown when options.axis=x", function(done){
         $collection.rovingTabindex('foo',{axis:"x"});
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('leftarrow.commonKeyDown');
     });
 
     it("should trigger change.rovingTabindex event on rightarrow.commonKeyDown when options.axis=x", function(done){
         $collection.rovingTabindex('foo',{axis:"x"});
-        $collection.on('change.rovingTabindex', done);
+        $collection.on('rovingTabindexChange', done);
         $collection.trigger('rightarrow.commonKeyDown');
     });
 
