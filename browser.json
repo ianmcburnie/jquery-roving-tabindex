@@ -1,0 +1,6 @@
+{
+    "dependencies":[
+        {"require-run": "jquery"},
+        {"require-run": "@ebay/jquery-common-keys"}
+    ]
+}
