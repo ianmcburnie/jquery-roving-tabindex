@@ -70,6 +70,10 @@ To listen for roving tabindex change:
 $('#tabs_0 > li').on('rovingTabindexChange', function(e, newTabindexItem) {});
 ```
 
+## Dependencies
+
+* [jquery-common-keys](https://github.com/ianmcburnie/jquery-common-keys)
+
 ## Development
 
 Run `npm start` for test driven development. All tests are located in `test.js`.

@@ -15,40 +15,40 @@ describe("jquery.rovingtabindex.js", function() {
         $collection = $('#widget li');
     });
 
-    it("should trigger change.rovingTabindex event on downarrow.commonKeyDown by default", function(done){
+    it("should trigger rovingTabindexChange event on downarrow by default", function(done){
         $collection.rovingTabindex('foo');
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('downarrow.commonKeyDown');
+        $collection.trigger('downArrowKeyDown');
     });
 
-    it("should trigger change.rovingTabindex event on uparrow.commonKeyDown by default", function(done){
+    it("should trigger rovingTabindexChange event on uparrow by default", function(done){
         $collection.rovingTabindex('foo');
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('uparrow.commonKeyDown');
+        $collection.trigger('upArrowKeyDown');
     });
 
-    it("should trigger change.rovingTabindex event on downarrow.commonKeyDown when options.axis=y", function(done){
+    it("should trigger rovingTabindexChange event on downarrow when options.axis=y", function(done){
         $collection.rovingTabindex('foo',{axis:"y"});
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('downarrow.commonKeyDown');
+        $collection.trigger('downArrowKeyDown');
     });
 
-    it("should trigger change.rovingTabindex event on uparrow.commonKeyDown when options.axis=y", function(done){
+    it("should trigger rovingTabindexChange event on uparrow when options.axis=y", function(done){
         $collection.rovingTabindex('foo',{axis:"y"});
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('uparrow.commonKeyDown');
+        $collection.trigger('upArrowKeyDown');
     });
 
-    it("should trigger change.rovingTabindex event on leftarrow.commonKeyDown when options.axis=x", function(done){
+    it("should trigger rovingTabindexChange event on leftarrow when options.axis=x", function(done){
         $collection.rovingTabindex('foo',{axis:"x"});
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('leftarrow.commonKeyDown');
+        $collection.trigger('leftArrowKeyDown');
     });
 
-    it("should trigger change.rovingTabindex event on rightarrow.commonKeyDown when options.axis=x", function(done){
+    it("should trigger rovingTabindexChange event on rightarrow when options.axis=x", function(done){
         $collection.rovingTabindex('foo',{axis:"x"});
         $collection.on('rovingTabindexChange', done);
-        $collection.trigger('rightarrow.commonKeyDown');
+        $collection.trigger('rightArrowKeyDown');
     });
 
     it("should have correct rovingtabindex data", function(){
