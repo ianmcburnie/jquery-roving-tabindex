@@ -1,10 +1,10 @@
 /**
 * @function jquery.rovingtabindex.js
-* @version 0.4.0
+* @version 0.5.0
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
 * @description jQuery collection plugin that implements a roving keyboard tabindex
 * @summary http://www.w3.org/TR/wai-aria-practices/#kbd_general_within
-* @requires jquery-common-keys
+* @requires jquery-common-keydown
 * @param {string} id
 * @param {Object} options
 * @param {string} options.axis
@@ -31,7 +31,7 @@
 
             var $this = $(this);
 
-            $this.commonKeys();
+            $this.commonKeyDown();
 
             // store collection index pos in element dataset
             $this.eq(0).data(id, {"rovingtabindex": i++});
