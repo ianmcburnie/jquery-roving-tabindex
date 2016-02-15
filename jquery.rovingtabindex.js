@@ -89,7 +89,7 @@
                     $itm.on('leftArrowKeyDown upArrowKeyDown', triggerPrev);
                     $itm.on('rightArrowKeyDown downArrowKeyDown', triggerNext);
                 }
-            })
+            });
         });
     };
 
