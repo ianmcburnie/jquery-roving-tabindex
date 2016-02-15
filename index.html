@@ -7,7 +7,7 @@
             div div > * {
                 margin-left: 2em;
             }
-            #demo_list {
+            .demo-list {
                 list-style-type: none;
                 padding: 0;
             }
@@ -16,8 +16,15 @@
     <body>
         <div role="main">
             <h1>Demo: @ebay/jquery-roving-tabindex</h1>
-            <p>Tab to list then use up and down arrows to change the roving tabindex.</p>
-            <ul id="demo_list">
+            <p>Tab to a list then use up and down arrows to change the roving tabindex.</p>
+            <h2>List 1</h2>
+            <ul class="demo-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+            <h2>List 2</h2>
+            <ul class="demo-list">
                 <li>Item 1</li>
                 <li>Item 2</li>
                 <li>Item 3</li>
@@ -28,11 +35,11 @@
         <script src="jquery.rovingtabindex.js"></script>
         <script>
             $(function() {
-                $('#demo_list > li').rovingTabindex('demo_list');
+                $('.demo-list').rovingTabindex('> li');
 
-                $("#demo_list").on('rovingTabindexChange', function(e, newTabIndex) {
-                    console.log('rovingTabindexChange', e);
-                    newTabIndex.focus();
+                $(".demo-list").on('rovingTabindexChange', function(e, newTabIndexItem) {
+                    console.log('rovingTabindexChange', e, newTabIndexItem);
+                    newTabIndexItem.focus();
                 });
             });
         </script>

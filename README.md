@@ -5,10 +5,10 @@
     <a href='https://coveralls.io/github/ianmcburnie/jquery-roving-tabindex?branch=master'><img src='https://coveralls.io/repos/ianmcburnie/jquery-roving-tabindex/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
 </p>
 
-jQuery collection plugin that implements a roving keyboard tabindex
+jQuery collection plugin that implements a roving keyboard tabindex on the items of a widget.
 
 ```js
-$(collection).rovingTabindex(id, [options]);
+$(widget).rovingTabindex(rovingItems, [options]);
 ```
 
 ## Experimental
@@ -23,7 +23,7 @@ npm install @ebay/jquery-roving-tabindex
 
 ## Params
 
-* id : a unique id, usually the id of the collection container element
+* rovingItems : selector that identifies the descendant elements that require roving tab indexes
 
 ## Options
 
@@ -42,32 +42,31 @@ npm install @ebay/jquery-roving-tabindex
 Input:
 
 ```html
-<ul id="tabs_0" role="tablist">
+<ul role="tablist">
     <li role="tab">Tab 1</li>
-    <li role="tab">Tab 1</li>
-    <li role="tab">Tab 1</li>
+    <li role="tab">Tab 2</li>
+    <li role="tab">Tab 3</li>
 </ul>
 ```
 
 ```js
-$('#tabs_0 > li').rovingTabindex('tabs_0');
+$('[role=tablist]').rovingTabindex('[role=tab]');
 ```
 
 Output:
 
 ```html
-<ul id="tabs_0" role="tablist">
-    <li role="tab" data-tabs_0="{"rovingtabindex":0}" tabindex="0">Tab 0</li>
-    <li role="tab" data-tabs_0="{"rovingtabindex":1}">Tab 1</li>
-    <li role="tab" data-tabs_0="{"rovingtabindex":2}">Tab 2</li>
+<ul role="tablist">
+    <li role="tab" tabindex="0">Tab 0</li>
+    <li role="tab" tabindex="-1">Tab 1</li>
+    <li role="tab" tabindex="-1">Tab 2</li>
 </ul>
 ```
-
 
 To listen for roving tabindex change:
 
 ```js
-$('#tabs_0 > li').on('rovingTabindexChange', function(e, newTabindexItem) {});
+$('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {});
 ```
 
 ## Dependencies
