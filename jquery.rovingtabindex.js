@@ -1,22 +1,55 @@
 /**
-* @function jquery.rovingtabindex.js
-* @version 0.6.0
-* @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @description jQuery collection plugin that implements a roving keyboard tabindex on selected descendant rovingItems
-* @summary http://www.w3.org/TR/wai-aria-practices/#kbd_general_within
-* @requires jquery-common-keydown
-* @param {Object} rovingItems - descendant items that will receive roving tabindex
-* @param {Object} options
-* @param {string} options.axis - x, y or both (default)
-* @param {boolean} options.wrap - keyboard focus wraps from last to first & vice versa
-* @param {string} options.activeIndex - specify the initial active item by index position
-* @fires rovingTabindexChange
-* @fires nextRovingTabindex
-* @fires prevRovingTabindex
-*/
-(function ($, window, document, undefined) {
+ * @file jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
+ * @author Ian McBurnie <ianmcburnie@hotmail.com>
+ */
+
+(function($, window, document, undefined) {
 
     var pluginName = 'jquery-roving-tabindex';
+
+    /**
+    * jQuery definition to anchor JsDoc comments.
+    *
+    * @see http://jquery.com/
+    * @name $
+    * @class jQuery Library
+    */
+
+    /**
+    * jQuery 'fn' definition to anchor JsDoc comments.
+    *
+    *
+    * @see http://jquery.com/
+    * @name fn
+    * @class jQuery Plugin Scope
+    * @memberof jQuery
+    */
+
+    /**
+    * jQuery collection plugin that implements aria-activedescendant keyboard navigation on given widgets
+    *
+    * @class rovingTabindex
+    * @version 0.6.1
+    * @fires rovingTabindexChange - when roving tabindex changes
+    * @param {Object} rovingItems - descendant items that will receive roving tabindex
+    * @param {Object} options
+    * @param {string} options.axis - set arrow key axis to x, y or both (default)
+    * @param {boolean} options.wrap - keyboard focus wraps from last to first & vice versa
+    * @param {string} options.activeIndex - specify the initial active item by index position
+    * @return {jQuery} chainable jQuery class
+    * @requires jquery-common-keydown
+    * @memberof jQuery.fn
+    */
+
+    /**
+    * rovingTabindexChange event
+    *
+    * @event rovingTabindexChange
+    * @type {object}
+    * @property {object} event - event object
+    * @property {object} newRovingItem - new roving item element
+    * @memberof jQuery.fn.rovingTabindex
+    */
 
     $.fn.rovingTabindex = function rovingTabindex(rovingItems, options) {
 
@@ -40,12 +73,12 @@
                     var itemIdx = $this.data(pluginName).idx;
                     var $prevEl = $rovingItems.eq(itemIdx - 1);
                     var hasPrevEl = ($prevEl.length === 1);
-                    var $lastEl = $rovingItems.eq($rovingItems.length-1);
+                    var $lastEl = $rovingItems.eq($rovingItems.length - 1);
                     var $roveToEl = (hasPrevEl && itemIdx !== 0) ? $prevEl : (options.wrap !== false) ? $lastEl : $this;
 
                     $this.attr('tabindex', '-1');
                     $roveToEl.attr('tabindex', '0');
-                    $widget.trigger("rovingTabindexChange", $roveToEl.get(0));
+                    $widget.trigger('rovingTabindexChange', $roveToEl.get(0));
                 });
 
                 $widget.on('nextRovingTabindex', function onNext(e) {
@@ -54,11 +87,11 @@
                     var $nextEl = $rovingItems.eq(itemIdx + 1);
                     var hasNextEl = ($nextEl.length === 1);
                     var $firstEl = $rovingItems.eq(0);
-                    var $roveToEl = (hasNextEl) ? $nextEl : (options.wrap !== false) ? $firstEl: $this;
+                    var $roveToEl = (hasNextEl) ? $nextEl : (options.wrap !== false) ? $firstEl : $this;
 
                     $this.attr('tabindex', '-1');
                     $roveToEl.attr('tabindex', '0');
-                    $widget.trigger("rovingTabindexChange", $roveToEl.get(0));
+                    $widget.trigger('rovingTabindexChange', $roveToEl.get(0));
                 });
             }
 
@@ -66,7 +99,7 @@
                 var $itm = $(itm);
 
                 // store index position on each item
-                $itm.data(pluginName, {"idx": idx});
+                $itm.data(pluginName, {'idx': idx});
 
                 // listen for common keydown events
                 $itm.commonKeyDown();

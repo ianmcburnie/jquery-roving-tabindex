@@ -41,6 +41,10 @@
                     console.log('rovingTabindexChange', e, newTabIndexItem);
                     newTabIndexItem.focus();
                 });
+
+                $(".demo-list li").on('click', function(e) {
+                    console.log($(this).data());
+                });
             });
         </script>
     </body>
