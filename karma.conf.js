@@ -18,6 +18,8 @@ module.exports = function(config) {
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/@ebay/jquery-common-keydown/jquery.commonkeydown.js',
       'jquery.rovingtabindex.js',
+      'test-data.js',
+      'test-setup.js',
       'test.js'
     ],
 

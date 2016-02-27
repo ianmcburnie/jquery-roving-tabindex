@@ -64,7 +64,7 @@
             var $widget = $(this);
             var $rovingItems = $widget.find(rovingItems);
 
-            if ($rovingItems.size() > 0) {
+            if ($rovingItems.length > 0) {
 
                 $rovingItems.eq(activeIndex).attr('tabindex', '0');
 

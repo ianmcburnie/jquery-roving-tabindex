@@ -21,25 +21,9 @@ This plugin is still in an experimental state, until it reaches v1.0.0 you must 
 npm install @ebay/jquery-roving-tabindex
 ```
 
-## Params
-
-* rovingItems : selector that identifies the descendant elements that require roving tab indexes
-
-## Options
-
-* wrap: reaching end of collection will wrap back to beginning, and vice versa
-* axis: x, y or both (default)
-* activeIndex: index of the item that receives tabindex on init (default is 0)
-
-## Events
-
-* rovingTabindexChange : fired when collection's roving tabindex changes
-* nextRovingTabindex : move tab index to next collection item
-* prevRovingTabindex : move tab index to prev collection item
-
 ## Example
 
-Input:
+HTML:
 
 ```html
 <ul role="tablist">
@@ -48,6 +32,8 @@ Input:
     <li role="tab">Tab 3</li>
 </ul>
 ```
+
+Execute plugin:
 
 ```js
 $('[role=tablist]').rovingTabindex('[role=tab]');
@@ -63,11 +49,51 @@ Output:
 </ul>
 ```
 
+First down arrow key will update DOM to:
+
+```html
+<ul role="tablist">
+    <li role="tab" tabindex="-1">Tab 0</li>
+    <li role="tab" tabindex="0">Tab 1</li>
+    <li role="tab" tabindex="-1">Tab 2</li>
+</ul>
+```
+
+Next down arrow key will update DOM to:
+
+```html
+<ul role="tablist">
+    <li role="tab" tabindex="-1">Tab 0</li>
+    <li role="tab" tabindex="-1">Tab 1</li>
+    <li role="tab" tabindex="0">Tab 2</li>
+</ul>
+```
+
 To listen for roving tabindex change:
 
 ```js
-$('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {});
+$('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {
+    newTabindexItem.focus();
+});
 ```
+
+Note this plugin does **not** set focus, it only updates the tabindex attribute.
+
+## Params
+
+* rovingItems : selector that identifies the descendant collection that requires a roving tab index
+
+## Options
+
+* wrap: reaching end of collection will wrap back to beginning, and vice versa
+* axis: x, y or both (default)
+* activeIndex: index of the item that receives tabindex on init (default is 0)
+
+## Events
+
+* rovingTabindexChange : fired when collection's roving tabindex changes
+* nextRovingTabindex : move tab index to next collection item
+* prevRovingTabindex : move tab index to prev collection item
 
 ## Dependencies
 
