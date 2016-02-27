@@ -16,12 +16,10 @@ data.forEach(function(data) {
     describe("when arrow down key has been pressed once", function() {
         beforeAll(function() {
             setupSuite(data);
-            $rovingItems.trigger('downArrowKeyDown');
+            $rovingItems.first().trigger('downArrowKeyDown');
         });
         it("should have tabindex='-1' on first item", function() {
-            setTimeout(function() {
-                expect($rovingItems.first().attr('tabindex')).toBe('-1');
-            }, 50);
+            expect($rovingItems.first().attr('tabindex')).toBe('-1');
         });
         it("should have triggered onRovingTabindexChange", function() {
             expect(onRovingTabindexChange).toHaveBeenCalled();
@@ -30,12 +28,10 @@ data.forEach(function(data) {
     describe("when arrow up key has been pressed once", function() {
         beforeAll(function() {
             setupSuite(data);
-            $rovingItems.trigger('upArrowKeyDown');
+            $rovingItems.first().trigger('upArrowKeyDown');
         });
         it("should have tabindex='-1' on first item", function() {
-            setTimeout(function() {
-                expect($rovingItems.first().attr('tabindex')).toBe('-1');
-            }, 50);
+            expect($rovingItems.first().attr('tabindex')).toBe('-1');
         });
         it("should have triggered onRovingTabindexChange", function() {
             expect(onRovingTabindexChange).toHaveBeenCalled();
