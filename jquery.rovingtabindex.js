@@ -26,7 +26,7 @@
     */
 
     /**
-    * jQuery collection plugin that implements aria-activedescendant keyboard navigation on given widgets
+    * jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
     *
     * @class rovingTabindex
     * @version 0.6.1
