@@ -1,9 +1,6 @@
 /**
  * @file jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @requires jQuery
- * @requires @ebay/jquery-common-keydown
- * @version 0.6.1
  */
 
 (function($, window, document, undefined) {
@@ -11,26 +8,42 @@
     var pluginName = 'jquery-roving-tabindex';
 
     /**
-    * The jQuery plugin namespace.
-    * @external "jQuery.fn"
-    * @see {@link http://learn.jquery.com/plugins/|jQuery Plugins}
+    * jQuery definition to anchor JsDoc comments.
+    *
+    * @see http://jquery.com/
+    * @name $
+    * @class jQuery Library
+    */
+
+    /**
+    * jQuery 'fn' definition to anchor JsDoc comments.
+    *
+    *
+    * @see http://jquery.com/
+    * @name fn
+    * @class jQuery Plugin Scope
+    * @memberof jQuery
     */
 
     /**
     * jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
-    * @class external:"jQuery.fn".rovingTabindex
+    *
+    * @class rovingTabindex
+    * @version 0.6.1
     * @fires rovingTabindexChange - when roving tabindex changes
     * @param {Object} rovingItems - descendant items that will receive roving tabindex
-    * @param {Object} [options]
-    * @param {string} [options.axis] - set arrow key axis to x, y or both (default)
-    * @param {boolean} [options.wrap] - keyboard focus wraps from last to first & vice versa
-    * @param {string} [options.activeIndex] - specify the initial active item by index position
+    * @param {Object} options
+    * @param {string} options.axis - set arrow key axis to x, y or both (default)
+    * @param {boolean} options.wrap - keyboard focus wraps from last to first & vice versa
+    * @param {string} options.activeIndex - specify the initial active item by index position
     * @return {jQuery} chainable jQuery class
+    * @requires jquery-common-keydown
     * @memberof jQuery.fn
     */
 
     /**
     * rovingTabindexChange event
+    *
     * @event rovingTabindexChange
     * @type {object}
     * @property {object} event - event object

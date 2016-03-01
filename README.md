@@ -132,7 +132,7 @@ Each test run will generate the following reports:
 
 ## JSDocs
 
-https://doclets.io/ianmcburnie/jquery-roving-tabindex/master
+JSDocs are generated under `./jsdoc` folder.
 
 ## CI Build
 
