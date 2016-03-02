@@ -69,31 +69,30 @@ Next down arrow key will update DOM to:
 </ul>
 ```
 
-To listen for roving tabindex change:
+Clicking a roving item with mouse or touch will also update the roving tab index.
+
+To listen for roving tabindex changes:
 
 ```js
 $('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {
-    newTabindexItem.focus();
+    // do something
 });
 ```
 
-Note this plugin does **not** set focus, it only updates the tabindex attribute.
-
 ## Params
 
-* rovingItems : selector that identifies the descendant collection that requires a roving tab index
+* rovingItems: selector that identifies the descendant collection that requires a roving tab index
 
 ## Options
 
 * wrap: reaching end of collection will wrap back to beginning, and vice versa
 * axis: x, y or both (default)
 * activeIndex: index of the item that receives tabindex on init (default is 0)
+* setFocus: by default, the plugin will set focus to the new roving tab index
 
 ## Events
 
 * rovingTabindexChange : fired when collection's roving tabindex changes
-* nextRovingTabindex : move tab index to next collection item
-* prevRovingTabindex : move tab index to prev collection item
 
 ## Dependencies
 
@@ -122,18 +121,6 @@ The following hooks exist, and do not need to be invoked manually:
 * `npm prepublish` cleans, lints, tests and builds on every `npm publish` command
 * `pre-commit` cleans, lints, tests and builds on every `git commit` command
 
-## Test Reports
-
-Each test run will generate the following reports:
-
-* `/test_reports/coverage` contains Istanbul code coverage report
-* `/test_reports/html` contains HTML test report
-* `/test_reports/junit` contains JUnit test report
-
-## JSDocs
-
-JSDocs are generated under `./jsdoc` folder.
-
 ## CI Build
 
 https://travis-ci.org/ianmcburnie/jquery-roving-tabindex
@@ -141,3 +128,11 @@ https://travis-ci.org/ianmcburnie/jquery-roving-tabindex
 ## Code Coverage
 
 https://coveralls.io/github/ianmcburnie/jquery-roving-tabindex?branch=master
+
+## Test Reports
+
+Local test reports are generated under `test_reports` folder.
+
+## JSDocs
+
+Local JSDocs are generated under `jsdoc` folder.

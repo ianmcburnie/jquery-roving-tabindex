@@ -30,7 +30,7 @@
             <ul class="demo-list">
                 <li>Item 1</li>
                 <li>Item 2</li>
-                <li>Item 2</li>
+                <li>Item 3</li>
             </ul>
         </div>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -38,11 +38,10 @@
         <script src="jquery.rovingtabindex.js"></script>
         <script>
             $(function() {
-                $('.demo-list').rovingTabindex('> li');
+                $('.demo-list').rovingTabindex('li');
 
                 $(".demo-list").on('rovingTabindexChange', function(e, newTabIndexItem) {
                     console.log('rovingTabindexChange', e, newTabIndexItem);
-                    newTabIndexItem.focus();
                 });
 
                 $(".demo-list li").on('click', function(e) {

@@ -18,8 +18,11 @@ data.forEach(function(data) {
             setupSuite(data);
             $rovingItems.first().trigger('downArrowKeyDown');
         });
-        it("should have tabindex='-1' on first item", function() {
-            expect($rovingItems.first().attr('tabindex')).toBe('-1');
+        it("should have tabindex='-1' on first item", function(done) {
+            setTimeout(function() {
+                expect($rovingItems.first().attr('tabindex')).toBe('-1');
+                done();
+            }, 10);
         });
         it("should have triggered onRovingTabindexChange", function() {
             expect(onRovingTabindexChange).toHaveBeenCalled();
@@ -30,8 +33,11 @@ data.forEach(function(data) {
             setupSuite(data);
             $rovingItems.first().trigger('upArrowKeyDown');
         });
-        it("should have tabindex='-1' on first item", function() {
-            expect($rovingItems.first().attr('tabindex')).toBe('-1');
+        it("should have tabindex='-1' on first item", function(done) {
+            setTimeout(function() {
+                expect($rovingItems.first().attr('tabindex')).toBe('-1');
+                done();
+            }, 10);
         });
         it("should have triggered onRovingTabindexChange", function() {
             expect(onRovingTabindexChange).toHaveBeenCalled();
@@ -43,6 +49,9 @@ data.forEach(function(data) {
             $rovingItems.trigger('rightArrowKeyDown');
             $rovingItems.trigger('leftArrowKeyDown');
         });
+        it("should have tabindex='0' on first item", function() {
+            expect($rovingItems.first().attr('tabindex')).toBe('0');
+        });
         it("should not have triggered rovingTabindexChange event", function() {
             expect(onRovingTabindexChange).not.toHaveBeenCalled();
         });
@@ -52,6 +61,9 @@ data.forEach(function(data) {
             setupSuite(data, {axis:'x'});
             $rovingItems.trigger('downArrowKeyDown');
             $rovingItems.trigger('upArrowKeyDown');
+        });
+        it("should have tabindex='0' on first item", function() {
+            expect($rovingItems.first().attr('tabindex')).toBe('0');
         });
         it("should not have triggered rovingTabindexChange event", function() {
             expect(onRovingTabindexChange).not.toHaveBeenCalled();
