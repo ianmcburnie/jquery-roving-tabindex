@@ -1,7 +1,7 @@
 /**
  * @file jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.7.0
+ * @version 0.7.1
  * @requires jquery
  * @requires @ebay/jquery-common-keydown
  */
