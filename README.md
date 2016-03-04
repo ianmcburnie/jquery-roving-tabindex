@@ -3,6 +3,8 @@
 <p>
     <a href="https://travis-ci.org/ianmcburnie/jquery-roving-tabindex"><img src="https://api.travis-ci.org/ianmcburnie/jquery-roving-tabindex.svg?branch=master" alt="Build Status" /></a>
     <a href='https://coveralls.io/github/ianmcburnie/jquery-roving-tabindex?branch=master'><img src='https://coveralls.io/repos/ianmcburnie/jquery-roving-tabindex/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
+    <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex.svg" alt="Dependency status" /></a>
+    <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex#info=devDependencies"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex/dev-status.svg" alt="devDependency status" /></a>
 </p>
 
 jQuery collection plugin that implements a roving keyboard tabindex on the items of a widget.
