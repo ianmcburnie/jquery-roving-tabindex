@@ -3,7 +3,7 @@
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
  * @version 0.7.1
  * @requires jquery
- * @requires @ebay/jquery-common-keydown
+ * @requires jquery-common-keydown
  */
 (function($, window, document, undefined) {
 

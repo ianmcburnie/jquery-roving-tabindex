@@ -1,7 +1,7 @@
 {
     "dependencies":[
         {"require-run": "jquery"},
-        "@ebay/jquery-common-keydown",
+        "jquery-common-keydown",
         "jquery.rovingtabindex.js"
     ]
 }

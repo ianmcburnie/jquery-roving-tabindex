@@ -1,4 +1,4 @@
-# @ebay/jquery-roving-tabindex
+# jquery-roving-tabindex
 
 <p>
     <a href="https://travis-ci.org/ianmcburnie/jquery-roving-tabindex"><img src="https://api.travis-ci.org/ianmcburnie/jquery-roving-tabindex.svg?branch=master" alt="Build Status" /></a>
@@ -20,7 +20,7 @@ This plugin is still in an experimental state, until it reaches v1.0.0 you must 
 ## Install
 
 ```js
-npm install @ebay/jquery-roving-tabindex
+npm install jquery-roving-tabindex
 ```
 
 ## Example
@@ -99,7 +99,7 @@ $('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {
 ## Dependencies
 
 * [jquery](https://jquery.com/)
-* [@ebay/jquery-common-keydown](https://github.com/ianmcburnie/jquery-common-keydown)
+* [jquery-common-keydown](https://github.com/ianmcburnie/jquery-common-keydown)
 
 ## Development
 

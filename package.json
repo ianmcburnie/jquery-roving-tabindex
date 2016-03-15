@@ -1,5 +1,5 @@
 {
-  "name": "@ebay/jquery-roving-tabindex",
+  "name": "jquery-roving-tabindex",
   "description": "jQuery collection plugin that implements a roving keyboard tabindex",
   "version": "0.7.1",
   "scripts": {
@@ -39,7 +39,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@ebay/jquery-common-keydown": "~0.0.0",
+    "jquery-common-keydown": "~0.0.0",
     "coveralls": "^2.11.4",
     "jasmine-core": "^2.3.4",
     "jquery": ">=1.11 < 3",
@@ -59,6 +59,6 @@
   },
   "peerDependencies": {
     "jquery": ">=1.11 < 3",
-    "@ebay/jquery-common-keydown": "~0.0.0"
+    "jquery-common-keydown": "~0.0.0"
   }
 }
