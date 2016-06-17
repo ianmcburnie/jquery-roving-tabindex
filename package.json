@@ -39,7 +39,6 @@
     "jquery": ">=1.11",
     "jquery-common-keydown": "~0.1.1",
     "jquery-migrate": "^1.4.1",
-    "jquery-next-id": "~0.1.0",
     "jsdoc": "^3.4.0",
     "jsmin": "^1.0.1",
     "karma": "^0.13.22",
