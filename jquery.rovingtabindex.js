@@ -1,12 +1,11 @@
 /**
  * @file jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.7.1
+ * @version 0.8.0
  * @requires jquery
  * @requires jquery-common-keydown
  */
 (function($, window, document, undefined) {
-
     var pluginName = 'jquery-roving-tabindex';
 
     /**
@@ -21,7 +20,6 @@
     * @return {Object} chainable jQuery class
     */
     $.fn.rovingTabindex = function rovingTabindex(rovingItems, options) {
-
         options = $.extend({
             axis: 'both',
             wrap: true,
@@ -30,7 +28,6 @@
         }, options);
 
         return this.each(function onEachMatchedEl() {
-
             var $widget = $(this);
             var $rovingItems = $widget.find(rovingItems);
 
@@ -92,7 +89,7 @@
 
             // store index position on each item and set initial tabindex state
             $rovingItems.each(function onEachMatchedDescendantEl(idx, itm) {
-                $(itm).data(pluginName, {'idx': idx});
+                $(itm).data(pluginName, {idx: idx});
                 $(itm).attr('tabindex', (options.activeIndex === idx) ? 0 : '-1');
             });
 
