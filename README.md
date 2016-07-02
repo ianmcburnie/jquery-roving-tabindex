@@ -7,7 +7,9 @@
     <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex#info=devDependencies"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex/dev-status.svg" alt="devDependency status" /></a>
 </p>
 
-jQuery collection plugin that implements a roving keyboard tabindex on the items of a widget.
+jQuery collection plugin that implements one-dimensional roving keyboard tabindex on the items of a widget.
+
+NOTE: This plugin is not suitable for two-dimensional grid navigation.
 
 ```js
 $(widget).rovingTabindex(rovingItems, [options]);

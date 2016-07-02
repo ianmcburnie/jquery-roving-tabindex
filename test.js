@@ -18,9 +18,9 @@ data.forEach(function(data) {
             setupSuite(data);
             $rovingItems.first().trigger('downArrowKeyDown');
         });
-        it("should have tabindex='-1' on first item", function(done) {
+        it("should have no tabindex attribute on first item", function(done) {
             setTimeout(function() {
-                expect($rovingItems.first().attr('tabindex')).toBe('-1');
+                expect($rovingItems.first().attr('tabindex')).toBe(undefined);
                 done();
             }, 10);
         });
@@ -33,9 +33,9 @@ data.forEach(function(data) {
             setupSuite(data);
             $rovingItems.first().trigger('upArrowKeyDown');
         });
-        it("should have tabindex='-1' on first item", function(done) {
+        it("should have no tabindex attribute on first item", function(done) {
             setTimeout(function() {
-                expect($rovingItems.first().attr('tabindex')).toBe('-1');
+                expect($rovingItems.first().attr('tabindex')).toBe(undefined);
                 done();
             }, 10);
         });

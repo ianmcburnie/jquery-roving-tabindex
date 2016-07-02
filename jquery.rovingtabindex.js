@@ -1,7 +1,7 @@
 /**
- * @file jQuery collection plugin that implements a roving keyboard tabindex on selected descendant roving items
+ * @file jQuery collection plugin that implements one dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.8.0
+ * @version 0.8.1
  * @requires jquery
  * @requires jquery-common-keydown
  */
@@ -12,10 +12,10 @@
     * @method "jQuery.fn.rovingTabindex"
     * @param {Object} rovingItems - descendant items that will receive roving tabindex state
     * @param {Object} [options]
-    * @param {string} [options.axis] - set arrow key axis to x, y or both (default)
-    * @param {boolean} [options.wrap] - keyboard focus wraps from last to first & vice versa
-    * @param {string} [options.activeIndex] - specify the initial active item by index position
-    * @param {string} [options.setFocus] - set focus when roving tab index changes (true)
+    * @param {string} [options.axis] - set arrow key axis to x, y or both (default: both)
+    * @param {boolean} [options.wrap] - keyboard focus wraps from last to first & vice versa (default: true)
+    * @param {string} [options.activeIndex] - specify the initial active item by index position (default: 0)
+    * @param {string} [options.setFocus] - set focus when roving tab index changes (default: true)
     * @fires rovingTabindexChange - when roving tabindex changes
     * @return {Object} chainable jQuery class
     */
@@ -30,82 +30,89 @@
         return this.each(function onEachMatchedEl() {
             var $widget = $(this);
             var $rovingItems = $widget.find(rovingItems);
+            var numRovingItems = $rovingItems.length;
+            var currentItemIndex = options.activeIndex;
 
-            function updateFocus($el) {
-                setTimeout(function() {
-                    $el.focus();
-                }, 0);
+            // ensure item index is not out of bounds
+            // todo: ensure item index is an integer
+            if (currentItemIndex >= numRovingItems) {
+                currentItemIndex = 0;
             }
 
-            function prev(e) {
-                var $target = $(e.target);
-                var itemIdx = $target.data(pluginName).idx;
-                var isFirstEl = (itemIdx === 0);
-                var $roveToEl;
+            function updateModel(roveToIndex) {
+                var $roveFromEl = $rovingItems.eq(currentItemIndex);
+                var $roveToEl = $rovingItems.eq(roveToIndex);
 
-                if (isFirstEl) {
-                    if (options.wrap === true) {
-                        $roveToEl = $rovingItems.eq($rovingItems.length - 1);
-                    }
-                } else {
-                    $roveToEl = $rovingItems.eq(itemIdx - 1);
-                }
+                $roveFromEl.removeAttr('tabindex');
+                $roveToEl.attr('tabindex', '0');
 
                 if (options.setFocus === true) {
-                    updateFocus($roveToEl);
+                    // voiceover works better when setting focus after short timeout
+                    setTimeout(function() {
+                        $roveToEl.focus();
+                    }, 0);
                 }
+
+                currentItemIndex = $roveToEl.data(pluginName).idx;
+                $widget.trigger('rovingTabindexChange', $roveToEl);
             }
 
-            function next(e) {
-                var $target = $(e.target);
-                var itemIdx = $target.data(pluginName).idx;
-                var isLastEl = (itemIdx === $rovingItems.length - 1);
-                var $roveToEl;
+            function roveToPrevItem(e) {
+                var isOnFirstEl = (currentItemIndex === 0);
+                var roveToIndex;
 
-                if (isLastEl) {
+                if (isOnFirstEl) {
                     if (options.wrap === true) {
-                        $roveToEl = $rovingItems.eq(0);
+                        roveToIndex = numRovingItems - 1;
                     }
                 } else {
-                    $roveToEl = $rovingItems.eq(itemIdx + 1);
+                    roveToIndex = currentItemIndex - 1;
                 }
 
-                if (options.setFocus === true) {
-                    updateFocus($roveToEl);
-                }
+                updateModel(roveToIndex);
             }
 
-            // update roving tabindex state every time focus is changed
-            $rovingItems.on('focus', function(e) {
-                var $target = $(e.target);
-                var $current = $widget.find('[tabindex=0]');
+            function roveToNextItem(e) {
+                var isOnLastEl = (currentItemIndex === numRovingItems - 1);
+                var roveToIndex;
 
-                if (!$target.is($current)) {
-                    $current.attr('tabindex', '-1');
-                    $target.attr('tabindex', '0');
-                    $widget.trigger('rovingTabindexChange', $target);
+                if (isOnLastEl) {
+                    if (options.wrap === true) {
+                        roveToIndex = 0;
+                    }
+                } else {
+                    roveToIndex = currentItemIndex + 1;
                 }
+
+                updateModel(roveToIndex);
+            }
+
+            // listen for click events
+            $rovingItems.on('click', function(e) {
+                updateModel($(e.target).data(pluginName).idx);
             });
 
-            // store index position on each item and set initial tabindex state
+            // store index position on each item
             $rovingItems.each(function onEachMatchedDescendantEl(idx, itm) {
                 $(itm).data(pluginName, {idx: idx});
-                $(itm).attr('tabindex', (options.activeIndex === idx) ? 0 : '-1');
             });
+
+            // one item must be in tabindex
+            $rovingItems.eq(currentItemIndex).attr('tabindex', '0');
 
             // listen for common keydown events
             $rovingItems.commonKeyDown();
 
             // handle arrow keys
             if (options.axis === 'x') {
-                $rovingItems.on('leftArrowKeyDown', prev);
-                $rovingItems.on('rightArrowKeyDown', next);
+                $rovingItems.on('leftArrowKeyDown', roveToPrevItem);
+                $rovingItems.on('rightArrowKeyDown', roveToNextItem);
             } else if (options.axis === 'y') {
-                $rovingItems.on('upArrowKeyDown', prev);
-                $rovingItems.on('downArrowKeyDown', next);
+                $rovingItems.on('upArrowKeyDown', roveToPrevItem);
+                $rovingItems.on('downArrowKeyDown', roveToNextItem);
             } else {
-                $rovingItems.on('leftArrowKeyDown upArrowKeyDown', prev);
-                $rovingItems.on('rightArrowKeyDown downArrowKeyDown', next);
+                $rovingItems.on('leftArrowKeyDown upArrowKeyDown', roveToPrevItem);
+                $rovingItems.on('rightArrowKeyDown downArrowKeyDown', roveToNextItem);
             }
         });
     };

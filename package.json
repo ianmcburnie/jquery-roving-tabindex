@@ -1,6 +1,6 @@
 {
   "name": "jquery-roving-tabindex",
-  "description": "jQuery collection plugin that implements a roving keyboard tabindex",
+  "description": "jQuery collection plugin that implements one-dimensional roving tabindex keyboard navigation",
   "version": "0.8.0",
   "scripts": {
     "start": "karma start --autoWatch true --singleRun false",
