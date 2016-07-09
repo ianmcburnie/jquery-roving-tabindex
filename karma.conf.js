@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/jquery-common-keydown/jquery.commonkeydown.js',
+      'node_modules/jquery-linear-navigation/jquery.linearnavigation.js',
       'jquery.rovingtabindex.js',
       'test-data.js',
       'test-setup.js',

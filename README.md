@@ -109,7 +109,7 @@ $('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {
 ## Dependencies
 
 * [jquery](https://jquery.com/)
-* [jquery-common-keydown](https://github.com/ianmcburnie/jquery-common-keydown)
+* [jquery-linear-navigation](https://github.com/ianmcburnie/jquery-linear-navigation)
 
 ## Development
 

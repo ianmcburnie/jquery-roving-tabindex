@@ -7,10 +7,10 @@ data.forEach(function(data) {
             expect($rovingItems.first().attr('tabindex')).toBe('0');
         });
         it("should have {idx:0} as first item data", function() {
-            expect($rovingItems.first().data('jquery-roving-tabindex').idx).toBe(0);
+            expect($rovingItems.first().data('jquery-linear-navigation').idx).toBe(0);
         });
         it("should have {idx:(length - 1)} as last item data", function() {
-            expect($rovingItems.last().data('jquery-roving-tabindex').idx).toBe($rovingItems.length - 1);
+            expect($rovingItems.last().data('jquery-linear-navigation').idx).toBe($rovingItems.length - 1);
         });
     });
     describe("when arrow down key has been pressed once", function() {

@@ -1,9 +1,8 @@
 /**
  * @file jQuery collection plugin that implements one dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.8.1
+ * @version 0.9.0
  * @requires jquery
- * @requires jquery-common-keydown
  */
 (function($, window, document, undefined) {
     var pluginName = 'jquery-roving-tabindex';
@@ -19,7 +18,7 @@
     * @fires rovingTabindexChange - when roving tabindex changes
     * @return {Object} chainable jQuery class
     */
-    $.fn.rovingTabindex = function rovingTabindex(rovingItems, options) {
+    $.fn.rovingTabindex = function rovingTabindex(rovingItemsSelector, options) {
         options = $.extend({
             axis: 'both',
             wrap: true,
@@ -29,18 +28,12 @@
 
         return this.each(function onEachMatchedEl() {
             var $widget = $(this);
-            var $rovingItems = $widget.find(rovingItems);
+            var $rovingItems = $widget.find(rovingItemsSelector);
             var numRovingItems = $rovingItems.length;
-            var currentItemIndex = options.activeIndex;
 
-            // ensure item index is not out of bounds
-            // todo: ensure item index is an integer
-            if (currentItemIndex >= numRovingItems) {
-                currentItemIndex = 0;
-            }
-
-            function updateModel(roveToIndex) {
-                var $roveFromEl = $rovingItems.eq(currentItemIndex);
+            // an update to rovingtabindex requires the fromIndex and toIndex
+            function update(fromIndex, roveToIndex) {
+                var $roveFromEl = $rovingItems.eq(fromIndex);
                 var $roveToEl = $rovingItems.eq(roveToIndex);
 
                 $roveFromEl.removeAttr('tabindex');
@@ -53,67 +46,28 @@
                     }, 0);
                 }
 
-                currentItemIndex = $roveToEl.data(pluginName).idx;
                 $widget.trigger('rovingTabindexChange', $roveToEl);
             }
 
-            function roveToPrevItem(e) {
-                var isOnFirstEl = (currentItemIndex === 0);
-                var roveToIndex;
-
-                if (isOnFirstEl) {
-                    if (options.wrap === true) {
-                        roveToIndex = numRovingItems - 1;
-                    }
-                } else {
-                    roveToIndex = currentItemIndex - 1;
-                }
-
-                updateModel(roveToIndex);
-            }
-
-            function roveToNextItem(e) {
-                var isOnLastEl = (currentItemIndex === numRovingItems - 1);
-                var roveToIndex;
-
-                if (isOnLastEl) {
-                    if (options.wrap === true) {
-                        roveToIndex = 0;
-                    }
-                } else {
-                    roveToIndex = currentItemIndex + 1;
-                }
-
-                updateModel(roveToIndex);
-            }
-
-            // listen for click events
-            $rovingItems.on('click', function(e) {
-                updateModel($(e.target).data(pluginName).idx);
-            });
-
-            // store index position on each item
-            $rovingItems.each(function onEachMatchedDescendantEl(idx, itm) {
-                $(itm).data(pluginName, {idx: idx});
-            });
-
             // one item must be in tabindex
-            $rovingItems.eq(currentItemIndex).attr('tabindex', '0');
+            $rovingItems.eq(options.activeIndex).attr('tabindex', '0');
 
-            // listen for common keydown events
-            $rovingItems.commonKeyDown();
+            // call linearNavigation plugin. This plugin holds state.
+            $widget.linearNavigation(rovingItemsSelector, options);
 
-            // handle arrow keys
-            if (options.axis === 'x') {
-                $rovingItems.on('leftArrowKeyDown', roveToPrevItem);
-                $rovingItems.on('rightArrowKeyDown', roveToNextItem);
-            } else if (options.axis === 'y') {
-                $rovingItems.on('upArrowKeyDown', roveToPrevItem);
-                $rovingItems.on('downArrowKeyDown', roveToNextItem);
-            } else {
-                $rovingItems.on('leftArrowKeyDown upArrowKeyDown', roveToPrevItem);
-                $rovingItems.on('rightArrowKeyDown downArrowKeyDown', roveToNextItem);
-            }
+            // listen to linearNavigationChange event
+            $widget.on('linearNavigationChange', function(e, data) {
+                update(data.fromIndex, data.toIndex);
+            });
+
+            // listen for change to roving tab index items
+            $widget.on('rovingTabIndexItemsChange', function(e) {
+                // find the new items
+                $rovingItems = $widget.find(rovingItemsSelector);
+
+                // call the linearNavigation plugin again
+                $widget.linearNavigation(rovingItemsSelector, options);
+            });
         });
     };
 }(jQuery, window, document));

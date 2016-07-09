@@ -37,7 +37,7 @@
     "eslint-config-google": "^0.4.0",
     "jasmine-core": "^2.4.1",
     "jquery": ">=1.11",
-    "jquery-common-keydown": "~0.1.1",
+    "jquery-linear-navigation": "~0.0.1",
     "jquery-migrate": "^1.4.1",
     "jsdoc": "^3.4.0",
     "jsmin": "^1.0.1",
@@ -53,7 +53,7 @@
   },
   "peerDependencies": {
     "jquery": ">=1.11",
-    "jquery-common-keydown": "~0.1.1"
+    "jquery-linear-navigation": "~0.0.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
