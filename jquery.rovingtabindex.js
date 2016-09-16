@@ -1,7 +1,7 @@
 /**
  * @file jQuery collection plugin that implements one dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.9.0
+ * @version 0.9.1
  * @requires jquery
  */
 (function($, window, document, undefined) {
