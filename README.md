@@ -109,7 +109,8 @@ Run `npm start` for test driven development. All tests are located in `test.js`.
 
 Execute `npm run` to view all available CLI scripts:
 
-* `npm start` test driven development: watches code and re-tests after any change
+* `npm start` starts local server and syncs browser on any code change
+* `npm tdd` test driven development: watches code and re-tests after any change
 * `npm test` runs tests & generates reports (see reports section below)
 * `npm run lint` lints code for syntax and style
 * `npm run fix` attempts to auto fix style errors
@@ -120,7 +121,7 @@ Execute `npm run` to view all available CLI scripts:
 
 The following hooks exist, and do not need to be invoked manually:
 
-* `npm prepublish` cleans, lints, tests and builds on every `npm publish` command
+* `npm prepublish` cleans, lints, tests and builds on every `npm publish` and `npm install` command
 * `pre-commit` cleans, lints, tests and builds on every `git commit` command
 
 ## CI Build
