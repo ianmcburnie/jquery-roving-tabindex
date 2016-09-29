@@ -4,54 +4,108 @@
         <title>Demo: jquery-roving-tabindex</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <style>
-            div div > * {
-                margin-left: 2em;
+            body {
+                margin: 0;
             }
-            .demo-list {
-                list-style-type: none;
-                padding: 0;
+            #eyebrow {
+                background-color: #333;
+                color: #eee;
+                padding: 10px;
+            }
+            .examples {
+                padding: 10px;
+            }
+            .readme {
+                background-color: #eee;
+                padding: 10px;
+            }
+            .widget table {
+                border-collapse: collapse;
+                margin-top: 5px;
+                width: 100%;
+            }
+            .widget table caption {
+                font-weight: bold;
+            }
+            .widget td {
+                border: 1px solid #eee;
+                text-align: center;
             }
         </style>
     </head>
     <body>
         <div role="main">
-            <h1>Demo: jquery-roving-tabindex</h1>
-            <p>Tab to a list then use up and down arrows to change the roving tabindex.</p>
-            <h2>List 1</h2>
-            <ul class="demo-list">
-                <li>Item 1</li>
-            </ul>
-            <h2>List 2</h2>
-            <ul class="demo-list">
-                <li>Item 1</li>
-                <li>Item 2</li>
-            </ul>
-            <h2>List 3</h2>
-            <ul class="demo-list">
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
-
-            <button id="append-items">Append New Items</button>
+            <div id="eyebrow">
+                <h1>Demo: jquery-roving-tabindex</h1>
+            </div>
+            <div id="examples">
+                <div class="readme">
+                    <h2>Linear Widgets</h2>
+                    <p>Tab to a list item then use up and down arrows to change the roving tabindex.</p>
+                    <button id="append-linear-items">Append New Items</button>
+                </div>
+                <div class="examples">
+                    <h3>Linear Widget 1</h3>
+                    <ul class="widget widget--linear">
+                        <li>Item 1</li>
+                    </ul>
+                    <h3>Linear Widget 2</h3>
+                    <ul class="widget widget--linear">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                    </ul>
+                    <h3>Linear Widget 3</h3>
+                    <ul class="widget widget--linear">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                </div>
+                <div class="readme">
+                    <h2>Grid Widgets</h2>
+                    <p>Tab to a cell then use up, down, left and right arrows to navigate</p>
+                    <button id="append-grid-items">Append New Row</button>
+                </div>
+                <div class="examples">
+                    <h3>Grid Widget 1</h3>
+                    <div class="widget widget--grid">
+                        <table>
+                            <tbody>
+                                <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                                <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </h2>
         </div>
         <script src="browser.js"></script>
         <script>
             $(function() {
-                $('.demo-list').rovingTabindex('li');
+                var count = 14;
 
-                $(".demo-list").on('rovingTabindexChange', function(e, newTabIndexItem) {
-                    console.log('rovingTabindexChange', e, newTabIndexItem);
+                $('.widget--linear').rovingTabindex('li');
+                $('.widget--grid').rovingTabindex('td', {isGrid: true});
+
+                $(".widget").on('rovingTabindexChange gridNavigationBoundary', 'li, td', function(e, data) {
+                    console.log(e, data, this);
                 });
 
-                $(".demo-list li").on('click', function(e) {
-                    console.log($(this).data());
+                $('button#append-linear-items').on('click', function() {
+                    $('.widget--linear').append('<li>Item n</li>');
+                    $(".widget--linear").trigger('rovingTabindexItemsChange');
                 });
 
-                $('button#append-items').on('click', function() {
-                    $('.demo-list').append('<li>Item n</li>');
-                    $(".demo-list").trigger('rovingTabIndexItemsChange');
-                })
+                $('button#append-grid-items').on('click', function() {
+                    var $tr = $('<tr>');
+
+                    for(var i = 0; i < 7; i++) {
+                        $tr.append($('<td>{x}</td>'.replace('{x}', ++count)));
+                    }
+
+                    $("tbody").append($tr);
+                    $(".widget--grid").trigger('rovingTabindexItemsChange');
+                });
             });
         </script>
     </body>

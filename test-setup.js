@@ -8,11 +8,12 @@ function setupSuite(html, options) {
     // setup globals
     $widget = $('[role=menu]');
     $rovingItems = $widget.find('[role=menuitem]');
+
     onRovingTabindexChange = jasmine.createSpy('onRovingTabindexChange');
 
     // execute plugin on widget
-    $widget.rovingTabindex($rovingItems, options);
+    $widget.rovingTabindex('[role=menuitem]', options);
 
     // setup event handlers on widget
-    $widget.on('rovingTabindexChange', onRovingTabindexChange);
+    $widget.on('rovingTabindexChange', '[role=menuitem]', onRovingTabindexChange);
 }

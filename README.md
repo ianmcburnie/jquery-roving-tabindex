@@ -7,9 +7,8 @@
     <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex#info=devDependencies"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex/dev-status.svg" alt="devDependency status" /></a>
 </p>
 
-jQuery collection plugin that implements one-dimensional roving keyboard tabindex on the items of a widget.
+jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on the items of a widget.
 
-NOTE: This plugin is not suitable for two-dimensional grid navigation.
 
 ```js
 $(widget).rovingTabindex(rovingItems, [options]);
@@ -25,7 +24,7 @@ This plugin is still in an experimental state, until it reaches v1.0.0 you must 
 npm install jquery-roving-tabindex
 ```
 
-## Example
+## Example - One Dimensional
 
 HTML:
 
@@ -48,8 +47,8 @@ Output:
 ```html
 <ul role="tablist">
     <li role="tab" tabindex="0">Tab 0</li>
-    <li role="tab" tabindex="-1">Tab 1</li>
-    <li role="tab" tabindex="-1">Tab 2</li>
+    <li role="tab">Tab 1</li>
+    <li role="tab">Tab 2</li>
 </ul>
 ```
 
@@ -57,9 +56,9 @@ First down arrow key will update DOM to:
 
 ```html
 <ul role="tablist">
-    <li role="tab" tabindex="-1">Tab 0</li>
+    <li role="tab">Tab 0</li>
     <li role="tab" tabindex="0">Tab 1</li>
-    <li role="tab" tabindex="-1">Tab 2</li>
+    <li role="tab">Tab 2</li>
 </ul>
 ```
 
@@ -67,36 +66,56 @@ Next down arrow key will update DOM to:
 
 ```html
 <ul role="tablist">
-    <li role="tab" tabindex="-1">Tab 0</li>
+    <li role="tab">Tab 0</li>
     <li role="tab" tabindex="-1">Tab 1</li>
-    <li role="tab" tabindex="0">Tab 2</li>
+    <li role="tab">Tab 2</li>
 </ul>
 ```
-
-Clicking a roving item with mouse or touch will also update the roving tab index.
 
 To listen for roving tabindex changes:
 
 ```js
-$('.tabs').on('rovingTabindexChange', function(e, newTabindexItem) {
-    // do something
+$('.widget').on('rovingTabindexChange', 'li', function(e, data) {
+    // this = new roving tab li element
+    // data = {fromIndex: n, toIndex: n}
 });
+```
+
+## Example - Two Dimensional
+
+HTML:
+
+```html
+<div class="widget">
+    <table>
+        <tbody>
+            <tr><td>1</td><td>2</td><td>3</td></tr>
+            <tr><td>4</td><td>5</td><td>6</td></tr>
+            <tr><td>7</td><td>8</td><td>9</td></tr>
+        </tbody>
+    </table>
+</div>
+```
+
+Execute plugin:
+
+```js
+$('.widget').rovingTabindex('td', {isGrid: true});
 ```
 
 ## Params
 
 * rovingItems: selector that identifies the descendant collection that requires a roving tab index
-
-## Options
-
-* wrap: reaching end of collection will wrap back to beginning, and vice versa
-* axis: x, y or both (default)
-* activeIndex: index of the item that receives tabindex on init (default is 0)
-* setFocus: by default, the plugin will set focus to the new roving tab index
+* options.activeIndex: index of the item that receives tabindex on init (default: 0)
+* options.autoFocus: specify whether to set focus to the new roving tab index item (default: true)
+* options.isGrid: specify two-dimensional navigation (default: false)
+* options.wrap: reaching end of collection will wrap back to beginning, and vice versa
+* options.axis: x, y or both (default)
 
 ## Events
 
 * rovingTabindexChange : fired when collection's roving tabindex changes
+* rovingTabindexItemsChange : trigger when collection changes
 
 ## Dependencies
 
@@ -114,10 +133,7 @@ Execute `npm run` to view all available CLI scripts:
 * `npm test` runs tests & generates reports (see reports section below)
 * `npm run lint` lints code for syntax and style
 * `npm run fix` attempts to auto fix style errors
-* `npm run minify` builds minified version of code
-* `npm run jsdoc` generates jsdocs
 * `npm run build` minifies code and generates jsdocs
-* `npm run clean` deletes all generated files
 
 The following hooks exist, and do not need to be invoked manually:
 
