@@ -1,8 +1,11 @@
 /**
- * @file jQuery collection plugin that implements one dimensional roving keyboard tabindex on selected descendant roving items
+ * @file jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.10.0
+ * @version 0.11.0
  * @requires jquery
+ * @requires jquery-linear-navigation
+ * @requires jquery-grid-navigation
+ * @requires jquery-prevent-scroll-keys
  */
 (function($, window, document, undefined) {
     var pluginName = 'jquery-roving-tabindex';
@@ -16,7 +19,7 @@
     * @param {boolean} [options.autoInit] - set initial tabindex when plugin executes (default: true)
     * @param {boolean} [options.autoReset] - reset tabindex state when focus leaves widget (default: false)
     * @param {string} [options.axis] - set arrow key axis to x, y or both (default: both)
-    * @param {boolean} [options.wrap] - keyboard focus wraps from last to first & vice versa (default: true)
+    * @param {boolean} [options.autoWrap] - keyboard focus wraps from last to first & vice versa (default: true)
     * @fires rovingTabindexChange - when roving tabindex changes
     * @listens rovingTabindexItemsChange - when DOM has changed
     * @return {Object} chainable jQuery class
@@ -29,7 +32,7 @@
             autoReset: false,
             axis: 'both',
             isGrid: false,
-            wrap: true
+            autoWrap: false
         }, options);
 
         return this.each(function onEachMatchedEl() {
@@ -49,6 +52,9 @@
             } else {
                 $widget.linearNavigation(rovingItemsSelector, options);
             }
+
+            // use plugin to prevent arrow keys from scrolling page
+            $widget.preventScrollKeys(rovingItemsSelector);
 
             // listen to linearNavigationChange event
             $widget.on('linearNavigationInit gridNavigationInit linearNavigationChange gridNavigationChange', function(e, data) {

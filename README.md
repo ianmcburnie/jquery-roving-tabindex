@@ -11,7 +11,7 @@ jQuery collection plugin that implements one or two dimensional roving keyboard 
 
 
 ```js
-$(widget).rovingTabindex(rovingItems, [options]);
+$(widgetSelector).rovingTabindex(rovingItemsSelector, [options]);
 ```
 
 ## Experimental
@@ -105,12 +105,12 @@ $('.widget').rovingTabindex('td', {isGrid: true});
 
 ## Params
 
-* rovingItems: selector that identifies the descendant collection that requires a roving tab index
+* rovingItemsSelector: selector that identifies the descendant collection that requires a roving tab index
 * options.activeIndex: index of the item that receives tabindex on init (default: 0)
 * options.autoFocus: specify whether to set focus to the new roving tab index item (default: true)
+* options.autoWrap: reaching end of collection will wrap back to beginning, and vice versa (default: false)
+* options.axis: x, y or both (default: 'both')
 * options.isGrid: specify two-dimensional navigation (default: false)
-* options.wrap: reaching end of collection will wrap back to beginning, and vice versa
-* options.axis: x, y or both (default)
 
 ## Events
 
@@ -121,24 +121,19 @@ $('.widget').rovingTabindex('td', {isGrid: true});
 
 * [jquery](https://jquery.com/)
 * [jquery-linear-navigation](https://github.com/ianmcburnie/jquery-linear-navigation)
+* [jquery-grid-navigation](https://github.com/ianmcburnie/jquery-grid-navigation)
+* [jquery-prevent-scroll-keys](https://github.com/ianmcburnie/jquery-prevent-scroll-keys)
 
 ## Development
 
-Run `npm start` for test driven development. All tests are located in `test.js`.
+Useful NPM task runners:
 
-Execute `npm run` to view all available CLI scripts:
-
-* `npm start` starts local server and syncs browser on any code change
-* `npm tdd` test driven development: watches code and re-tests after any change
+* `npm start` for local browser-sync development.
 * `npm test` runs tests & generates reports (see reports section below)
-* `npm run lint` lints code for syntax and style
-* `npm run fix` attempts to auto fix style errors
-* `npm run build` minifies code and generates jsdocs
+* `npm run tdd` test driven development: watches code and re-tests after any change
+* `npm run build` cleans, lints, tests and minifies
 
-The following hooks exist, and do not need to be invoked manually:
-
-* `npm prepublish` cleans, lints, tests and builds on every `npm publish` and `npm install` command
-* `pre-commit` cleans, lints, tests and builds on every `git commit` command
+Execute `npm run` to view all available CLI scripts.
 
 ## CI Build
 

@@ -20,6 +20,7 @@ module.exports = function(config) {
       'node_modules/jquery-focus-exit/jquery.focusexit.js',
       'node_modules/jquery-grid-navigation/jquery.gridnavigation.js',
       'node_modules/jquery-linear-navigation/jquery.linearnavigation.js',
+      'node_modules/jquery-prevent-scroll-keys/jquery.preventscrollkeys.js',
       'jquery.rovingtabindex.js',
       'test-data.js',
       'test-setup.js',

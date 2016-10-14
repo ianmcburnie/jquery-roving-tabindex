@@ -1,6 +1,6 @@
 {
   "name": "jquery-roving-tabindex",
-  "description": "jQuery collection plugin that implements one-dimensional roving tabindex keyboard navigation",
+  "description": "jQuery collection plugin that implements one or two dimensional roving tabindex keyboard navigation",
   "version": "0.10.0",
   "scripts": {
     "start": "npm run lasso && parallelshell 'npm run server' 'npm run watch'",
@@ -34,7 +34,7 @@
     "type": "git",
     "url": "https://github.com/ianmcburnie/jquery-roving-tabindex.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2",
     "coveralls": "^2",
@@ -43,8 +43,9 @@
     "jasmine-core": "^2",
     "jquery": ">=1.11",
     "jquery-grid-navigation": "~0.0",
-    "jquery-linear-navigation": "~0.1",
+    "jquery-linear-navigation": "~0.2",
     "jquery-migrate": "^3",
+    "jquery-prevent-scroll-keys": "~0.5",
     "jsdoc": "^3",
     "jsmin": "^1",
     "karma": "^1",
@@ -63,7 +64,8 @@
   "peerDependencies": {
     "jquery": ">=1.11",
     "jquery-grid-navigation": "~0.0",
-    "jquery-linear-navigation": "~0.1"
+    "jquery-linear-navigation": "~0.2",
+    "jquery-prevent-scroll-keys": "~0.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
