@@ -1,7 +1,7 @@
 {
   "name": "jquery-roving-tabindex",
   "description": "jQuery collection plugin that implements one or two dimensional roving tabindex keyboard navigation",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "scripts": {
     "start": "npm run lasso && parallelshell 'npm run server' 'npm run watch'",
     "tdd": "karma start --autoWatch true --singleRun false",
