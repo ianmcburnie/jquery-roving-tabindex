@@ -1,7 +1,7 @@
 /**
  * @file jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.11.0
+ * @version 0.11.1
  * @requires jquery
  * @requires jquery-linear-navigation
  * @requires jquery-grid-navigation
@@ -30,9 +30,10 @@
             autoFocus: true,
             autoInit: true,
             autoReset: false,
+            autoWrap: false,
             axis: 'both',
-            isGrid: false,
-            autoWrap: false
+            disableHomeAndEndKeys: false,
+            isGrid: false
         }, options);
 
         return this.each(function onEachMatchedEl() {

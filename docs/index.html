@@ -100,7 +100,7 @@
                 });
 
                 $('button#append-linear-items').on('click', function() {
-                    $('.widget--linear').append('<li>Item n</li>');
+                    $('.widget--linear, .widget--linear-wrap').append('<li>Item n</li>');
                     $(".widget--linear, .widget--linear-wrap").trigger('rovingTabindexItemsChange');
                 });
 
