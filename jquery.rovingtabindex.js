@@ -1,7 +1,7 @@
 /**
  * @file jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.11.1
+ * @version 0.12.0
  * @requires jquery
  * @requires jquery-linear-navigation
  * @requires jquery-grid-navigation
@@ -20,6 +20,7 @@
     * @param {boolean} [options.autoReset] - reset tabindex state when focus leaves widget (default: false)
     * @param {string} [options.axis] - set arrow key axis to x, y or both (default: both)
     * @param {boolean} [options.autoWrap] - keyboard focus wraps from last to first & vice versa (default: true)
+    * @param {number} [options.setFocusDelay] - time in millieseconds to delay setting focus (default: 0)
     * @fires rovingTabindexChange - when roving tabindex changes
     * @listens rovingTabindexItemsChange - when DOM has changed
     * @return {Object} chainable jQuery class
@@ -33,7 +34,8 @@
             autoWrap: false,
             axis: 'both',
             disableHomeAndEndKeys: false,
-            isGrid: false
+            isGrid: false,
+            setFocusDelay: 0
         }, options);
 
         return this.each(function onEachMatchedEl() {
@@ -42,23 +44,28 @@
             var numRovingItems = $rovingItems.length;
 
             // Maintain tabindex attribute state
-            function updateTabindex($fromEl, $toEl) {
+            var updateTabindex = function($fromEl, $toEl) {
                 $fromEl.removeAttr('tabindex');
                 $toEl.attr('tabindex', '0');
-            }
+            };
 
-            // call linearNavigation plugin. This plugin holds state.
-            if (options.isGrid === true) {
-                $widget.gridNavigation(rovingItemsSelector, options);
-            } else {
-                $widget.linearNavigation(rovingItemsSelector, options);
-            }
+            // handler for when underlying dom changes
+            var onDomChange = function(e) {
+                // find the new items and update our cache
+                $rovingItems = $widget.find(rovingItemsSelector);
 
-            // use plugin to prevent arrow keys from scrolling page
-            $widget.preventScrollKeys(rovingItemsSelector);
+                numRovingItems = $rovingItems.length;
 
-            // listen to linearNavigationChange event
-            $widget.on('linearNavigationInit gridNavigationInit linearNavigationChange gridNavigationChange', function(e, data) {
+                // update the state
+                if (options.isGrid === true) {
+                    $widget.trigger('gridNavigationItemsChange');
+                } else {
+                    $widget.trigger('linearNavigationItemsChange');
+                }
+            };
+
+            // handler for when underlying navigation model changes
+            var onNavigationInitOrChange = function(e, data) {
                 var fromIndex = data.fromIndex;
                 var toIndex = data.toIndex;
                 var $roveFromEl = $rovingItems.eq(fromIndex);
@@ -71,26 +78,27 @@
                         // voiceover works better when setting focus after short timeout
                         setTimeout(function() {
                             $rovingItems.eq(toIndex).focus();
-                        }, 0);
+                        }, options.setFocusDelay);
                     }
                     $roveToEl.trigger('rovingTabindexChange', {fromIndex: fromIndex, toIndex: toIndex});
                 }
-            });
+            };
+
+            // call linearNavigation plugin. This plugin holds state.
+            if (options.isGrid === true) {
+                $widget.gridNavigation(rovingItemsSelector, options);
+            } else {
+                $widget.linearNavigation(rovingItemsSelector, options);
+            }
+
+            // use plugin to prevent arrow keys from scrolling page
+            $widget.preventScrollKeys(rovingItemsSelector);
+
+            // listen to linearNavigationChange event
+            $widget.on('linearNavigationInit gridNavigationInit linearNavigationChange gridNavigationChange', onNavigationInitOrChange);
 
             // listen for change to roving tab index items
-            $widget.on('rovingTabindexItemsChange', function(e) {
-                // find the new items and update our cache
-                $rovingItems = $widget.find(rovingItemsSelector);
-
-                numRovingItems = $rovingItems.length;
-
-                // update the state
-                if (options.isGrid === true) {
-                    $widget.trigger('gridNavigationItemsChange');
-                } else {
-                    $widget.trigger('linearNavigationItemsChange');
-                }
-            });
+            $widget.on('domChange', onDomChange);
         });
     };
 }(jQuery, window, document));

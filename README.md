@@ -105,17 +105,23 @@ $('.widget').rovingTabindex('td', {isGrid: true});
 
 ## Params
 
-* rovingItemsSelector: selector that identifies the descendant collection that requires a roving tab index
-* options.activeIndex: index of the item that receives tabindex on init (default: 0)
-* options.autoFocus: specify whether to set focus to the new roving tab index item (default: true)
-* options.autoWrap: reaching end of collection will wrap back to beginning, and vice versa (default: false)
-* options.axis: x, y or both (default: 'both')
-* options.isGrid: specify two-dimensional navigation (default: false)
+* `rovingItemsSelector`: selector that identifies the descendant collection that requires a roving tab index
+* `options.activeIndex`: index of the item that receives tabindex on init (default: 0)
+* `options.autoFocus`: set focus when roving tabindex changes (default: true)
+* `options.autoInit`: set initial tabindex state (but not focus) when plugin executes (default: true)
+* `options.autoReset`: reset tabindex state when focus exits widget (default: false)
+* `options.autoWrap`: reaching end of collection will wrap back to beginning, and vice versa (default: false)
+* `options.axis`: x, y or both (default: 'both')
+* `options.disableHomeAndEndKeys`: disable HOME and END key functionality (default: false)
+* `options.isGrid`: specify two-dimensional navigation (default: false)
 
-## Events
+## Triggers
 
-* rovingTabindexChange : fired when collection's roving tabindex changes
-* rovingTabindexItemsChange : trigger when collection changes
+* `rovingTabindexChange` : fired when collection's roving tabindex changes
+
+## Listens
+
+* `domChange` : trigger on widget when underlying dom changes. For example, new roving items are added.
 
 ## Dependencies
 
