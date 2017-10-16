@@ -2,7 +2,7 @@
  * @file jQuery collection plugin that implements one or two dimensional roving
  * keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
- * @version 0.12.0
+ * @version 1.0.0
  * @requires jquery
  * @requires jquery-linear-navigation
  * @requires jquery-grid-navigation
