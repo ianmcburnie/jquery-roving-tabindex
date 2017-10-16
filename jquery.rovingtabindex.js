@@ -1,5 +1,6 @@
 /**
- * @file jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on selected descendant roving items
+ * @file jQuery collection plugin that implements one or two dimensional roving
+ * keyboard tabindex on selected descendant roving items
  * @author Ian McBurnie <ianmcburnie@hotmail.com>
  * @version 0.12.0
  * @requires jquery
@@ -7,8 +8,8 @@
  * @requires jquery-grid-navigation
  * @requires jquery-prevent-scroll-keys
  */
-(function($, window, document, undefined) {
-    var pluginName = 'jquery-roving-tabindex';
+(function($, window, document, undefined) { // eslint-disable-line no-unused-vars
+    var pluginName = 'jquery-roving-tabindex'; // eslint-disable-line no-unused-vars
 
     /**
     * @method "jQuery.fn.rovingTabindex"
@@ -41,7 +42,6 @@
         return this.each(function onEachMatchedEl() {
             var $widget = $(this);
             var $rovingItems = $widget.find(rovingItemsSelector);
-            var numRovingItems = $rovingItems.length;
 
             // Maintain tabindex attribute state
             var updateTabindex = function($fromEl, $toEl) {
@@ -50,11 +50,9 @@
             };
 
             // handler for when underlying dom changes
-            var onDomChange = function(e) {
+            var onDomChange = function() {
                 // find the new items and update our cache
                 $rovingItems = $widget.find(rovingItemsSelector);
-
-                numRovingItems = $rovingItems.length;
 
                 // update the state
                 if (options.isGrid === true) {
@@ -80,7 +78,7 @@
                             $rovingItems.eq(toIndex).focus();
                         }, options.setFocusDelay);
                     }
-                    $roveToEl.trigger('rovingTabindexChange', {fromIndex: fromIndex, toIndex: toIndex});
+                    $roveToEl.trigger('rovingTabindexChange', { fromIndex: fromIndex, toIndex: toIndex });
                 }
             };
 
@@ -95,7 +93,10 @@
             $widget.preventScrollKeys(rovingItemsSelector);
 
             // listen to linearNavigationChange event
-            $widget.on('linearNavigationInit gridNavigationInit linearNavigationChange gridNavigationChange', onNavigationInitOrChange);
+            $widget.on(
+                'linearNavigationInit gridNavigationInit linearNavigationChange gridNavigationChange',
+                onNavigationInitOrChange
+            );
 
             // listen for change to roving tab index items
             $widget.on('domChange', onDomChange);

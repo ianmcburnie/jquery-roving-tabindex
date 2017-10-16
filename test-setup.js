@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 500;
 
 // called by every test suite

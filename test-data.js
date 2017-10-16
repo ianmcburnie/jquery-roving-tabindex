@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 var data = [
     '<ul role="menu">'
         + '<li role="menuitem">Item 1</li>'

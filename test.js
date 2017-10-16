@@ -1,5 +1,6 @@
-data.forEach(function(data) {
+/* eslint-disable no-undef */
 
+data.forEach(function(data) {
     describe("when no arrow key has been pressed", function() {
         beforeAll(function() {
             setupSuite(data);
@@ -29,7 +30,6 @@ data.forEach(function(data) {
         it("should have triggered onRovingTabindexChange 1 time", function() {
             expect(onRovingTabindexChange).toHaveBeenCalledTimes(1);
         });
-
     });
 
     describe("when arrow up key has been pressed once", function() {
@@ -44,7 +44,7 @@ data.forEach(function(data) {
 
     describe("when right and left arrow key have been pressed with axis set to y", function() {
         beforeAll(function() {
-            setupSuite(data, {axis:'y'});
+            setupSuite(data, { axis: 'y' });
             $rovingItems.trigger('rightArrowKeyDown');
             $rovingItems.trigger('leftArrowKeyDown');
         });
@@ -55,7 +55,7 @@ data.forEach(function(data) {
 
     describe("when up and down arrow key have been pressed with axis set to x", function() {
         beforeAll(function() {
-            setupSuite(data, {axis:'x'});
+            setupSuite(data, { axis: 'x' });
             $rovingItems.trigger('downArrowKeyDown');
             $rovingItems.trigger('upArrowKeyDown');
         });
