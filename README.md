@@ -1,10 +1,10 @@
 # jquery-roving-tabindex
 
 <p>
-    <a href="https://travis-ci.org/ianmcburnie/jquery-roving-tabindex"><img src="https://api.travis-ci.org/ianmcburnie/jquery-roving-tabindex.svg?branch=master" alt="Build Status" /></a>
-    <a href='https://coveralls.io/github/ianmcburnie/jquery-roving-tabindex?branch=master'><img src='https://coveralls.io/repos/ianmcburnie/jquery-roving-tabindex/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
-    <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex.svg" alt="Dependency status" /></a>
-    <a href="https://david-dm.org/ianmcburnie/jquery-roving-tabindex#info=devDependencies"><img src="https://david-dm.org/ianmcburnie/jquery-roving-tabindex/dev-status.svg" alt="devDependency status" /></a>
+    <a href="https://travis-ci.org/makeup-jquery/jquery-roving-tabindex"><img src="https://api.travis-ci.org/makeup-jquery/jquery-roving-tabindex.svg?branch=master" alt="Build Status" /></a>
+    <a href='https://coveralls.io/github/makeup-jquery/jquery-roving-tabindex?branch=master'><img src='https://coveralls.io/repos/makeup-jquery/jquery-roving-tabindex/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
+    <a href="https://david-dm.org/makeup-jquery/jquery-roving-tabindex"><img src="https://david-dm.org/makeup-jquery/jquery-roving-tabindex.svg" alt="Dependency status" /></a>
+    <a href="https://david-dm.org/makeup-jquery/jquery-roving-tabindex#info=devDependencies"><img src="https://david-dm.org/makeup-jquery/jquery-roving-tabindex/dev-status.svg" alt="devDependency status" /></a>
 </p>
 
 jQuery collection plugin that implements one or two dimensional roving keyboard tabindex on the items of a widget.
@@ -122,9 +122,9 @@ $('.widget').rovingTabindex('td', {isGrid: true});
 ## Dependencies
 
 * [jquery](https://jquery.com/)
-* [jquery-linear-navigation](https://github.com/ianmcburnie/jquery-linear-navigation)
-* [jquery-grid-navigation](https://github.com/ianmcburnie/jquery-grid-navigation)
-* [jquery-prevent-scroll-keys](https://github.com/ianmcburnie/jquery-prevent-scroll-keys)
+* [jquery-linear-navigation](https://github.com/makeup-jquery/jquery-linear-navigation)
+* [jquery-grid-navigation](https://github.com/makeup-jquery/jquery-grid-navigation)
+* [jquery-prevent-scroll-keys](https://github.com/makeup-jquery/jquery-prevent-scroll-keys)
 
 ## Development
 
@@ -139,11 +139,11 @@ Execute `npm run` to view all available CLI scripts.
 
 ## CI Build
 
-https://travis-ci.org/ianmcburnie/jquery-roving-tabindex
+https://travis-ci.org/makeup-jquery/jquery-roving-tabindex
 
 ## Code Coverage
 
-https://coveralls.io/github/ianmcburnie/jquery-roving-tabindex?branch=master
+https://coveralls.io/github/makeup-jquery/jquery-roving-tabindex?branch=master
 
 ## Test Reports
 
